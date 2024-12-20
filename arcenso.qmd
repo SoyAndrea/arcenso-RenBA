@@ -1,0 +1,138 @@
+---
+title: "Ejemplo de práctica arcenso"
+author: "Andrea Gómez Vargas"
+institute: "Meet up R-Ladies & R en Buenos Aires"
+lang: es
+language: 
+  title-block-author-single: "AUTORAS"
+  title-block-affiliation-single: "INSTITUCION"
+format: 
+   html:
+     df-print: kable
+     code-tools:
+      source: true
+---
+
+## arcenso
+
+> Documentación en https://soyandrea.github.io/arcenso/
+
+### Instalación
+
+```{r  echo=TRUE, message=FALSE, warning=FALSE, eval=FALSE}
+install.packages("remotes")
+remotes::install_github("SoyAndrea/arcenso")
+```
+
+
+### Activación del paquete y otroa
+
+```{r message=FALSE, warning=FALSE}
+library(arcenso)
+library(tidyverse)
+library(plotly)
+library(gt)
+```
+
+
+
+## Main functions
+
+- `get_census()`: get a list with the tables currently available in the package
+
+- `check_repository()`: reports the tables currently available in the package
+
+- `arcenso()`: shinyapp to query the available tables in the package
+
+
+## 
+
+
+```{r}
+get_census(year = 1970, topic = "ESTRUCTURA DE POBLACION", geolvl = "Total del país")
+```
+
+```{r}
+estructura_1970 <- get_census(year = 1970, topic = "ESTRUCTURA DE POBLACION", geolvl = "Total del país")
+
+str(estructura_1970)
+
+estructura_1970 <- as.data.frame(estructura_1970)
+```
+
+
+
+```{r}
+estructura_1970 <- estructura_1970 %>% 
+  rename(grupo_de_edad = c70_total_del_pais_poblacion_c1.grupo_de_edad,
+         sexo =  c70_total_del_pais_poblacion_c1.sexo,
+         poblacion = c70_total_del_pais_poblacion_c1.poblacion
+        ) %>% 
+  filter(sexo != "Total")
+
+estructura_1970
+```
+
+
+```{r}
+data <- estructura_1970 %>%
+    mutate(poblacion = as.numeric(poblacion),
+           value = ifelse(estructura_1970$sexo == "Varones", -poblacion, poblacion)
+           )
+
+```
+
+
+
+```{r}
+pi <-
+  data %>%
+  #rename(porcentaje = value) %>%
+  ggplot(aes(x = poblacion, y = grupo_de_edad, fill = sexo,
+             text = paste("porcentaje:", ifelse(sexo == "varones", porcentaje*(-1), porcentaje), "%"))) +
+  geom_col() +
+  scale_fill_manual(values = c("#9D719E","#E6B43D")) +
+  # scale_x_continuous(breaks = seq(-10, 10, by = 2),
+  #                    labels = paste0(c(seq(-10, 0, by = 2)*-1, seq(2, 10, by = 2)), "%")) +
+  labs(
+    x = "porcentaje",
+    y = "grupo de edad"
+  ) +
+  theme_bw() #+ theme(legend.position="bottom", legend.title = element_blank())
+
+ggplotly(pi, tooltip = c("text", "sexo", "edad")) %>% layout(legend = list(orientation = 'h'))
+
+```
+
+```{r}
+# Datos de ejemplo
+edad <- c("0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", "80+")
+varones <- c(5000, 5200, 4800, 4600, 5000, 5300, 4900, 4700, 4500, 4400, 4000, 3800, 3500, 3000, 2500, 2000, 1500)
+mujeres <- c(4800, 5000, 4600, 4400, 4900, 5200, 5000, 4800, 4600, 4500, 4200, 4000, 3700, 3200, 2700, 2200, 1800)
+
+# Crear data frame
+poblacion <- data.frame(
+  Edad = factor(edad, levels = rev(edad)), # Ordenar las edades de mayor a menor para la pirámide
+  Varones = -varones, # Invertir los valores de los varones
+  Mujeres = mujeres
+)
+
+# Convertir a formato largo para ggplot2
+poblacion_largo <- tidyr::pivot_longer(poblacion, cols = c(Varones, Mujeres), names_to = "Sexo", values_to = "Poblacion")
+
+# Crear la pirámide de población
+ggplot(poblacion_largo, aes(x = Edad, y = Poblacion, fill = Sexo)) +
+  geom_bar(stat = "identity", position = "identity") +
+  scale_y_continuous(labels = abs) + # Mostrar los valores absolutos en el eje Y
+  coord_flip() + # Girar el gráfico
+  labs(
+    title = "Pirámide de Población",
+    x = "Edad",
+    y = "Población",
+    fill = "Sexo"
+  ) +
+  scale_fill_manual(values = c("Varones" = "blue", "Mujeres" = "pink")) +
+  theme_minimal()
+
+```
+
