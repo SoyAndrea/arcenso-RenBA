@@ -1,16 +1,17 @@
 ---
-lightbox: true
-format: 
-  revealjs:
-    theme: [default, custom.scss]
-    width: 1600
-    height: 900
-    highlight-style: a11y
+title: "{arcenso}<br>⭐⭐⭐"
+subtitle: "Data from Argentina’s Population Census"
+author: "Andrea Gomez Vargas & Emanuel Ciardullo"
+institute: "R-Ladies & R en Buenos Aires"
+date: "12/20/2024"
+format:
+  revealjs: 
+    theme: custom.scss
+    self-contained: false
     logo: images/logo.png
+    highlight-style: a11y
     css: logo.css
-    #fig.align: "left"
-    #footer: "[**soyandrea.github.io/arcenso**](https://soyandrea.github.io/arcenso/)"
-embed-resources: true
+    footer: "[**soyandrea.github.io/arcenso**](https://soyandrea.github.io/arcenso/)"
 knitr:
   opts_chunk: 
     echo: true
@@ -19,253 +20,29 @@ knitr:
     fig.path: "figures/"
 from: markdown+emoji
 ---
-##  {.title}
 
-![](images/sol-arcenso.png){width="58%"}
+##
 
+<div style="text-align: center;">
+  ![](images/sol-arcenso.png){width="65%"}
+</div>
 
-## `arcenso`
+## {background-color="white"} 
 
-
-Es un proyecto apoyado por el programa de Campeones y Campeonas de rOpenSci cohorte 2023-2024[^1], con Andrea Gómez Vargas como desarrolladora principal, Emanuel Ciardullo como co-desarrollador y Luis D. Verde como mentor.
-
-
-[^1]: [Introducing rOpenSci Champions - Cohort 2023-2024](https://ropensci.org/blog/2024/02/15/champions-program-champions-2024/)
-
-# rOpenSci Champions Program ⭐⭐⭐
-
-## Objetivo
-
-::: columns
-::: {.column width="70%"}
-<br>
-
-El programa se diseña para identificar, reconocer y premiar a miembros apasionados de las comunidades.[^2]
-
-Con una duración de 12 meses que incluye formación basada en cohortes, desarrollo de un proyecto y mentorias 1:1.
-:::
-
-::: {.column width="30%"}
-<br> <br> ![logo rOpenSci](images/ropensci.png)
-:::
-:::
-
-[^2]: [¡Anunciamos el programa de Campeones y Campeonas de rOpenSci!](https://ropensci.org/es/blog/2022/09/22/launch-champions-program-es/)
-
-## Enfoque - cohorte 2023-2024
-
-::: columns
-::: {.column width="50%"}
-![cohorte ropensci champios](images/champios2024.png){width="100%"}
-:::
-
-::: {.column width="50%"}
-::: r-fit-text
-<br> <br>
-
-El programa está enfocado y pensando para que participen personas que pertenecen a grupos histórica y sistemáticamente excluidos de las comunidades de software abierto y de software de investigación y que están interesadas en contribuir a rOpenSci y al ecosistema más amplio de comunidades de software de código abierto y de investigación.
-:::
-:::
-:::
-
-## ¿Cuál fue(es) mi proyecto?
-
-<br>
-
-**Generar un paquete que permita disponer de los datos oficiales de los censos nacionales de población en Argentina** provenientes del INDEC desde 1970 hasta 2022, homogeneizados, ordenados y listos para usar.
-
-## ¿Por qué?
-
-<br>
-
-Actualmente los resultados históricos censales de **1970, 1980, 1991, 2001, 2010 y 2022** están disponibles en distintos formatos a través de libros físicos, PDFs, archivos en formato excel o en REDATAM, sin contar con un sistema o formato unificado que permita trabajar con los datos de estos seis periodos censales como base de datos.
-
-## Propuesta
-
-> De cuadros de excel a **tablas ordenadas** en R
-
-::: columns
-::: {.column width="70%"}
-![cuadro de excel descargado](images/excel.png){width="110%"}
-:::
-
-::: {.column width="30%"}
-![tabla ordenada en R](images/tabla.png){width="100%"}
-:::
-:::
-
-## ¿Por qué son importante los datos censales?
-
-::: incremental
--   Es una herramienta clave para entender las caracteristicas y necesidades de la población.
-
--   Proporcionan datos esenciales para la planificación y el desarrollo de las políticas públicas.
-
--   Planificación social y económica
-
--   Investigación académica y estudios sociales
-
--   Investigaciones de mercado y mucho más...
-:::
-
-# Proceso de trabajo
-
-## pregunta - problema
-
-¿Cómo empezar?
-
-::: r-stack
-![logos censales de argentina](images/censos.png){.fragment top="200" left="0" width="80%"}
-
-![meme](images/meme.png){.fragment top="50" right="50" width="50%"}
-:::
-
-## Trainings
-
-::: columns
-::: {.column width="20%"}
-<br>
-
-![rOpenSci image](images/champions_program_pictures/peep5.png)
-:::
-
-::: {.column width="80%"}
-<br>
-
-Participación en capacitaciones que incluyeron temáticas sobre conocimientos técnicos en desarrollo y revisión de software, contribuciones a los proyectos de rOpenSci y de R, entre otros.
-:::
-:::
-
-
-## Antes de las funciones: diseño conceptual
-
-![](images/esquema3.png)
-
-## Manos a la obra :hammer_and_wrench:
-
-::: columns
-::: {.column width="15%"}
-![](images/python.png) <br>
-
-![](images/R.png)
-:::
-
-::: {.column width="85%"}
--   webscraping para descarga de cuadros censales
-
--   listar los archivos descargados extrayendo su información
-
--   para la conversión de los cuadros de excel en formato tidy en Rbase
-:::
-:::
-
-## Problemas: lluvia de excels y formatos no estandarizados
-
-::: r-stack
-![](images/lluvia.png){.fragment top="200" left="0" width="60%"}
-
-![](images/cuadro2.png){.fragment top="100" left="0" width="80%"}
-
-![](images/cuadro.png){.fragment top="50" right="50" width="80%"}
-
-![](images/meme3.png){.fragment top="50" right="50" width="40%"}
-
-![](images/meme2.png){.fragment top="50" right="50" width="40%"}
-:::
-
-## ¿Cómo nos organizamos?
-
-![](images/esquema2.png)
-
-## Etapas censales
-
-![](images/esquema1.png)
-
-## Github projects - status del proyecto
-
-![](images/project.png)
-
-## issues en github para seguimiento
-
-![](images/issues.png)
-
-# {arcenso} :package:
-
-## ¿Cómo funciona?
-
-<br>
-
-### Instalación
-
-```{r  eval=FALSE}
-# install.packages("remotes")
-remotes::install_github("SoyAndrea/arcenso")
-```
-
-<br> <br>
-
-### Activación del paquete
-
-```{r}
-library(arcenso)
-```
-
-## `get_census()` - obtener tablas
-
-```{r}
-get_census( year = 1970, topic = "CONDICIONES HABITACIONALES", geolvl = "Total del país")
-```
-
-## `check_repository()` - reporte de tablas disponibles
-
-<br>
-
-```{r}
-check_repository( year = 1970, topic = "CONDICIONES HABITACIONALES", geolvl = "Total del país")
-```
-
-## `arcenso()` - shinyapp 
-
-```{r eval=FALSE}
-arcenso()
-```
-
-![](images/shiny.png){width="80%"}
-
-## Documentación
-
-```{r echo=FALSE}
-knitr::include_url("https://soyandrea.github.io/arcenso/",height = 600)
-```
-
-# Próximos pasos y metas :dizzy:
-
-## :footprints:
-
-::: incremental
-::: columns
-::: {.column width="40%"}
-![](https://i.pinimg.com/originals/9f/ff/73/9fff730a3d58f7973f6e2891ee468a2d.gif)
-:::
-
-::: {.column width="60%"}
--   mejorar la documentación
--   continuar con el roadmap por etapas y el proceso de clasificación, revisión y formateo.
--   lograr los estandares óptimos para llegar al peer-review
--   sumar a mas usuarios a utilizar el paquete
-:::
-:::
-:::
-
-# Lo más importante
-
-## 
-
+<div style="text-align: center;">
 ![](images/codehero.png)
+</div>
 
-## Gracias :grin:
+## **`arcenso`** 
+<br>
+<br>
 
-::: columns
+> Es un proyecto apoyado por el Programa de Campeones y Campeonas de rOpenSci cohorte 2023-2024, con Andrea Gómez Vargas como desarrolladora principal, Emanuel Ciardullo como co-desarrollador y Luis D. Verde como mentor.
+
+
+## Equipo de trabajo 
+
+:::::: columns
 ::: {.column width="33%"}
 ![](https://avatars.githubusercontent.com/u/45582182?v=4){width="60%" style="border-radius: 80%;"}
 
@@ -291,8 +68,174 @@ Estadístico
 
 Supervisor
 :::
+::::::
+
+
+
+# rOpenSci Champions Program ⭐⭐⭐
+
+## Objetivo
+
+::::: columns
+::: {.column width="70%"}
+<br>
+
+El programa se diseña para identificar, reconocer y premiar a miembros apasionados de las comunidades.
+
+Con una duración de 12 meses que incluye formación basada en cohortes, desarrollo de un proyecto y mentorias 1:1.
 :::
 
-## 
+::: {.column width="30%"}
+<br> <br> ![logo rOpenSci](images/ropensci.png)
+:::
+:::::
 
-<br> <br> <br> ![](images/arcenso.png){width="150%"}
+## ¿Cuál fue la propuesta?
+
+<br>
+
+**Generar un paquete que permita disponer de los datos oficiales de los censos nacionales de población en Argentina** provenientes del INDEC desde 1970 hasta 2022, homogeneizados, ordenados y listos para usar.
+
+## ¿Por qué?
+
+<br>
+
+Actualmente los resultados históricos censales de **1970, 1980, 1991, 2001, 2010 y 2022** están disponibles en distintos formatos a través de libros físicos, PDFs, archivos en formato excel o en REDATAM, sin contar con un sistema o formato unificado que permita trabajar con los datos de estos seis periodos censales como base de datos.
+
+## Propuesta
+
+> De cuadros de excel a **tablas ordenadas** en R
+
+::::: columns
+::: {.column width="70%"}
+![cuadro de excel descargado](images/excel.png){width="110%"}
+:::
+
+::: {.column width="30%"}
+![tabla ordenada en R](images/tabla.png){width="100%"}
+:::
+:::::
+
+
+
+# Proceso de trabajo
+
+## pregunta - problema
+
+¿Cómo empezar?
+
+::: r-stack
+![logos censales de argentina](images/censos.png){.fragment top="200" left="0" width="80%"}
+
+![meme](images/meme.png){.fragment top="50" right="50" width="50%"}
+:::
+
+
+## Antes de las funciones: diseño conceptual
+
+![](images/esquema3.png)
+
+## Manos a la obra :hammer_and_wrench:
+
+::::: columns
+::: {.column width="15%"}
+![](images/python.png) <br>
+
+![](images/R.png)
+:::
+
+::: {.column width="85%"}
+-   webscraping para descarga de cuadros censales
+
+-   listar los archivos descargados extrayendo su información
+
+-   para la conversión de los cuadros de excel en formato tidy en Rbase
+:::
+:::::
+
+## Problemas: lluvia de excels y formatos no estandarizados
+
+::: r-stack
+![](images/lluvia.png){.fragment top="200" left="0" width="60%"}
+
+![](images/cuadro2.png){.fragment top="100" left="0" width="80%"}
+
+![](images/cuadro.png){.fragment top="50" right="50" width="80%"}
+
+![](images/meme3.png){.fragment top="50" right="50" width="40%"}
+
+![](images/meme2.png){.fragment top="50" right="50" width="40%"}
+:::
+
+## ¿Cómo nos organizamos?
+
+![](images/esquema2.png)
+
+## Etapas censales
+
+```{mermaid}
+sequenceDiagram
+  participant Alice
+  participant Bob
+  Alice->>John: Hello John, how are you?
+  loop Healthcheck
+    John->>John: Fight against hypochondria
+  end
+  Note right of John: Rational thoughts <br/>prevail!
+  John-->>Alice: Great!
+  John->>Bob: How about you?
+  Bob-->>John: Jolly good!
+```
+
+
+# {arcenso} :package:
+
+## ¿Cómo usarlo?
+
+<br>
+
+### Instalación
+
+```{r  eval=FALSE}
+# install.packages("remotes")
+remotes::install_github("SoyAndrea/arcenso")
+```
+
+<br> <br>
+
+### Activación del paquete
+
+```{r}
+library(arcenso)
+```
+
+## Principales funciones
+
+### `get_census()` - obtener tablas
+
+```{r}
+#| eval: false
+get_census(year = 1970, 
+           topic = "CONDICIONES HABITACIONALES", 
+           geolvl = "Total del país")
+```
+
+### `check_repository()` - reporte disponibilidad
+
+```{r}
+#| eval: false
+check_repository(year = 1970, 
+                 topic = "CONDICIONES HABITACIONALES", 
+                 geolvl = "Total del país")
+```
+
+### `arcenso()` - shinyapp consulta
+
+```{r eval=FALSE}
+arcenso()
+```
+
+
+
+# Gracias :grin:
+
