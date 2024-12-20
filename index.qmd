@@ -32,15 +32,24 @@ from: markdown+emoji
 ## Crecer en comunidad
 ::: r-stack
 
+
 ![](images/codehero.png){.fragment top=250 left=0 width="70%"}
+
+[](images/inicio.jfif){.fragment top=100 left=0 width="80%"}
 
 ![](images/rladiesba.jpeg){.fragment top=100 left=0 width="80%"}
 
 ![](images/rladiesba2.jfif){.fragment top=100 left=0 width="80%"}
 
+![](images/rladiesba3.png){.fragment top=100 left=0 width="80%"}
+
 ![](images/latinr2021.jfif){.fragment top=100 left=0 width="80%"}
 
 ![](images/indec.jpeg){.fragment top=70 right=50 width="70%"}
+
+![](images/posit1.jpg){.fragment top=70 right=50 width="70%"}
+
+![](images/posit2.jpg){.fragment top=70 right=50 width="70%"}
 
 ![](images/ropensci-team.png){.fragment top=70 right=50 width="80%"}
 
