@@ -57,43 +57,31 @@ estructura_1970 <- get_census(year = 1970, topic = "ESTRUCTURA DE POBLACION", ge
 
 str(estructura_1970)
 
-estructura_1970 <- as.data.frame(estructura_1970)
+estructura_1970 <- estructura_1970[[1]]
 ```
 
 
 
 ```{r}
-estructura_1970 <- estructura_1970 %>% 
-  rename(grupo_de_edad = c70_total_del_pais_poblacion_c1.grupo_de_edad,
-         sexo =  c70_total_del_pais_poblacion_c1.sexo,
-         poblacion = c70_total_del_pais_poblacion_c1.poblacion
-        ) %>% 
-  filter(sexo != "Total")
+estructura_1970 <- estructura_1970[estructura_1970$sexo != "Total", ]
 
-estructura_1970
+estructura_1970$poblacion = as.numeric(estructura_1970$poblacion)
+
+estructura_1970$poblacion_rel = ifelse(estructura_1970$sexo == "Varones",  - estructura_1970$poblacion / sum(estructura_1970$poblacion[estructura_1970$sexo == "Varones"]), estructura_1970$poblacion / sum(estructura_1970$poblacion[estructura_1970$sexo == "Mujeres"]))
 ```
-
-
-```{r}
-data <- estructura_1970 %>%
-    mutate(poblacion = as.numeric(poblacion),
-           value = ifelse(estructura_1970$sexo == "Varones", -poblacion, poblacion)
-           )
-
-```
-
 
 
 ```{r}
 pi <-
-  data %>%
+  estructura_1970 %>%
   #rename(porcentaje = value) %>%
-  ggplot(aes(x = poblacion, y = grupo_de_edad, fill = sexo,
-             text = paste("porcentaje:", ifelse(sexo == "varones", porcentaje*(-1), porcentaje), "%"))) +
+  ggplot(aes(x = poblacion_rel, y = grupo_de_edad, fill = sexo,
+             #text = paste("porcentaje:", abs(poblacion_rel), "%")
+             )) +
   geom_col() +
   scale_fill_manual(values = c("#9D719E","#E6B43D")) +
-  # scale_x_continuous(breaks = seq(-10, 10, by = 2),
-  #                    labels = paste0(c(seq(-10, 0, by = 2)*-1, seq(2, 10, by = 2)), "%")) +
+  scale_x_continuous(breaks = seq(-0.1, 0.1, by = 0.05),
+                    labels = paste0(c(seq(-10, 0, by = 5)*-1, seq(5, 10, by = 5)), "%")) +
   labs(
     x = "porcentaje",
     y = "grupo de edad"
