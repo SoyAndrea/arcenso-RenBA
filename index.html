@@ -387,9 +387,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="index_files/libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="index_files/libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="index_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -418,6 +415,22 @@ Andrea Gomez Vargas &amp; Emanuel Ciardullo
 <p><img data-src="images/sol-arcenso.png" style="width:65.0%"></p>
 </div>
 </section>
+<section>
+<section id="un-poco-de-historia" class="title-slide slide level1 center">
+<h1>Un poco de historia</h1>
+
+</section>
+<section id="crecer-en-comunidad" class="slide level2">
+<h2>Crecer en comunidad</h2>
+<div class="r-stack">
+<p><img data-src="images/codehero.png" class="fragment" style="width:70.0%" data-top="250" data-left="0"></p>
+<p><img data-src="images/rladiesba.jpeg" class="fragment" style="width:80.0%" data-top="100" data-left="0"></p>
+<p><img data-src="images/rladiesba2.jfif" class="fragment" style="width:80.0%" data-top="100" data-left="0"></p>
+<p><img data-src="images/latinr2021.jfif" class="fragment" style="width:80.0%" data-top="100" data-left="0"></p>
+<p><img data-src="images/indec.jpeg" class="fragment" style="width:70.0%" data-top="70" data-right="50"></p>
+<p><img data-src="images/ropensci-team.png" class="fragment" style="width:80.0%" data-top="70" data-right="50"></p>
+</div>
+</section>
 <section id="arcenso" class="slide level2">
 <h2><strong><code>arcenso</code></strong></h2>
 <p><br> <br></p>
@@ -438,17 +451,6 @@ Andrea Gomez Vargas &amp; Emanuel Ciardullo
 <p><br> <br> <img data-src="images/fito.jpg" style="border-radius: 80%;;width:70.0%"></p>
 <p><span style="font-size: 18px;">Fito - supervisor</span></p>
 </div>
-</div>
-</section>
-<section>
-<section id="un-poco-de-historia" class="title-slide slide level1 center">
-<h1>Un poco de historia</h1>
-
-</section>
-<section id="crecer-en-comunidad" class="slide level2" data-background-color="white">
-<h2>Crecer en comunidad</h2>
-<div style="text-align: center;">
-<p><img data-src="images/codehero.png" style="width:80.0%"></p>
 </div>
 </section></section>
 <section>
@@ -571,31 +573,11 @@ Andrea Gomez Vargas &amp; Emanuel Ciardullo
 <img data-src="images/esquema2.png" class="r-stretch"></section>
 <section id="etapas-censales" class="slide level2">
 <h2>Etapas censales</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">sequenceDiagram
-  participant Alice
-  participant Bob
-  Alice-&gt;&gt;John: Hello John, how are you?
-  loop Healthcheck
-    John-&gt;&gt;John: Fight against hypochondria
-  end
-  Note right of John: Rational thoughts &lt;br/&gt;prevail!
-  John--&gt;&gt;Alice: Great!
-  John-&gt;&gt;Bob: How about you?
-  Bob--&gt;&gt;John: Jolly good!
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
+
+<img data-src="images/esquema1.png" class="r-stretch"></section>
 <section id="manos-a-la-obra" class="slide level2">
 <h2>Manos a la obra <span class="emoji" data-emoji="hammer_and_wrench">🛠️</span></h2>
+<p><br></p>
 <div class="columns">
 <div class="column" style="width:15%;">
 <p><img data-src="images/python.png"> <br></p>
@@ -616,7 +598,8 @@ Andrea Gomez Vargas &amp; Emanuel Ciardullo
 </section>
 <section id="paquetes" class="slide level2">
 <h2>Paquetes</h2>
-</section>
+
+<img data-src="images/packages.png" class="r-stretch quarto-figure-center"><p class="caption">hex de paquetes de trabajo</p></section>
 <section id="cómo-usarlo" class="slide level2">
 <h2>¿Cómo usarlo?</h2>
 <p><br></p>
@@ -639,31 +622,70 @@ Andrea Gomez Vargas &amp; Emanuel Ciardullo
 <span id="cb3-2"><a href=""></a>           <span class="at">topic =</span> <span class="st">"CONDICIONES HABITACIONALES"</span>, </span>
 <span id="cb3-3"><a href=""></a>           <span class="at">geolvl =</span> <span class="st">"Total del país"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br></p>
 <h3 id="check_repository"><code>check_repository()</code></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">check_repository</span>(<span class="at">year =</span> <span class="dv">1970</span>, </span>
 <span id="cb4-2"><a href=""></a>                 <span class="at">topic =</span> <span class="st">"CONDICIONES HABITACIONALES"</span>, </span>
 <span id="cb4-3"><a href=""></a>                 <span class="at">geolvl =</span> <span class="st">"Total del país"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br></p>
 <h3 id="arcenso-1"><code>arcenso()</code></h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">arcenso</span>() <span class="co"># shinyapp consulta</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="veamos-un-ejemplo-práctico" class="slide level2">
+<h2>Veamos un ejemplo práctico</h2>
+<div class="cell">
+<iframe src="arcenso.html" width="960" height="600" data-external="1">
+</iframe>
+</div>
 </section></section>
 <section>
-<section id="section-1" class="title-slide slide level1 center">
+<section id="próximos-pasos-y-metas" class="title-slide slide level1 center">
+<h1>Próximos pasos y metas 💫</h1>
+
+</section>
+<section id="section-1" class="slide level2">
+<h2>👣</h2>
+<div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="https://i.pinimg.com/originals/9f/ff/73/9fff730a3d58f7973f6e2891ee468a2d.gif"></p>
+</div><div class="column" style="width:60%;">
+<ul>
+<li class="fragment">mejorar la documentación</li>
+<li class="fragment">continuar con el roadmap por etapas y el proceso de clasificación, revisión y formateo.</li>
+<li class="fragment">lograr los estandares óptimos para llegar al peer-review</li>
+<li class="fragment">sumar a mas usuarios a utilizar el paquete</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="section-2" class="title-slide slide level1 center">
 <h1><img data-src="images/SVG%20Brandpack/icon_lettering_white.svg" style="width:70.0%"> 2025</h1>
 
 </section>
 <section id="sumate-a-las-actividades" class="slide level2">
 <h2>Sumate a las actividades</h2>
-<p><br> <br> ::: incremental - rOpenSci Champions Program 2025</p>
+<p><br> <br></p>
+<div>
 <ul>
-<li><p>Software Peer Review</p></li>
-<li><p>Community Calls</p></li>
-<li><p>Coworking :::</p></li>
+<li class="fragment"><p>rOpenSci Champions Program 2025</p></li>
+<li class="fragment"><p>Software Peer Review</p></li>
+<li class="fragment"><p>Community Calls</p></li>
+<li class="fragment"><p>Coworking</p></li>
 </ul>
+</div>
 </section></section>
+<section id="preguntas" class="title-slide slide level1 center">
+<h1>Preguntas <span class="emoji" data-emoji="grin">😁</span></h1>
+
+</section>
+
 <section id="gracias" class="title-slide slide level1 center">
 <h1>Gracias <span class="emoji" data-emoji="grin">😁</span></h1>
 <div class="quarto-auto-generated-content">

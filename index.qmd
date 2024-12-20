@@ -27,6 +27,25 @@ from: markdown+emoji
   ![](images/sol-arcenso.png){width="65%"}
 </div>
 
+# Un poco de historia
+
+## Crecer en comunidad
+::: r-stack
+
+![](images/codehero.png){.fragment top=250 left=0 width="70%"}
+
+![](images/rladiesba.jpeg){.fragment top=100 left=0 width="80%"}
+
+![](images/rladiesba2.jfif){.fragment top=100 left=0 width="80%"}
+
+![](images/latinr2021.jfif){.fragment top=100 left=0 width="80%"}
+
+![](images/indec.jpeg){.fragment top=70 right=50 width="70%"}
+
+![](images/ropensci-team.png){.fragment top=70 right=50 width="80%"}
+
+:::
+
 ## **`arcenso`** 
 <br>
 <br>
@@ -64,13 +83,6 @@ from: markdown+emoji
 ::::::
 
 
-# Un poco de historia
-
-## Crecer en comunidad {background-color="white"} 
-
-<div style="text-align: center;">
-![](images/codehero.png){width="80%"}
-</div> 
 
 # rOpenSci Champions Program ⭐⭐⭐
 
@@ -171,25 +183,16 @@ Actualmente los resultados históricos censales de **1970, 1980, 1991, 2001, 201
 
 ## Etapas censales
 
-```{mermaid}
-sequenceDiagram
-  participant Alice
-  participant Bob
-  Alice->>John: Hello John, how are you?
-  loop Healthcheck
-    John->>John: Fight against hypochondria
-  end
-  Note right of John: Rational thoughts <br/>prevail!
-  John-->>Alice: Great!
-  John->>Bob: How about you?
-  Bob-->>John: Jolly good!
-```
+![](images/esquema1.png)
 
 
 ## Manos a la obra :hammer_and_wrench:
 
+<br>
+
 ::::: columns
 ::: {.column width="15%"}
+
 ![](images/python.png) <br>
 
 ![](images/R.png)
@@ -208,6 +211,9 @@ sequenceDiagram
 # Armar {arcenso} :package:
 
 ## Paquetes
+
+![hex de paquetes de trabajo](images/packages.png)
+
 
 ## ¿Cómo usarlo?
 
@@ -238,6 +244,7 @@ get_census(year = 1970,
            topic = "CONDICIONES HABITACIONALES", 
            geolvl = "Total del país")
 ```
+<br>
 
 ### `check_repository()` 
 
@@ -247,6 +254,7 @@ check_repository(year = 1970,
                  topic = "CONDICIONES HABITACIONALES", 
                  geolvl = "Total del país")
 ```
+<br>
 
 ### `arcenso()` 
 
@@ -254,6 +262,35 @@ check_repository(year = 1970,
 arcenso() # shinyapp consulta
 ```
 
+## Veamos un ejemplo práctico
+
+```{r echo=FALSE}
+knitr::include_url("arcenso.html",height = 600)
+```
+
+
+# Próximos pasos y metas 💫
+
+## 👣
+
+::: {.incremental}
+
+::: columns
+::: {.column width="40%"}
+![](https://i.pinimg.com/originals/9f/ff/73/9fff730a3d58f7973f6e2891ee468a2d.gif)
+
+:::
+
+::: {.column width="60%"}
+
+- mejorar la documentación 
+- continuar con el roadmap por etapas y el proceso de clasificación, revisión y formateo.
+- lograr los estandares óptimos para llegar al peer-review
+- sumar a mas usuarios a utilizar el paquete
+
+:::
+:::
+:::
 
 
 
@@ -262,7 +299,9 @@ arcenso() # shinyapp consulta
 ## Sumate a las actividades
 <br>
 <br>
+
 ::: incremental
+
 - rOpenSci Champions Program 2025 
 
 - Software Peer Review
@@ -272,6 +311,7 @@ arcenso() # shinyapp consulta
 - Coworking
 :::
 
+# Preguntas :grin:
 
 # Gracias :grin:
 

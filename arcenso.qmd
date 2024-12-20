@@ -1,19 +1,15 @@
 ---
 title: "Ejemplo de práctica arcenso"
-author: "Andrea Gómez Vargas"
-institute: "Meet up R-Ladies & R en Buenos Aires"
 lang: es
-language: 
-  title-block-author-single: "AUTORAS"
-  title-block-affiliation-single: "INSTITUCION"
 format: 
    html:
+     light: flatly
+     dark: darkly
      df-print: kable
-     code-tools:
-      source: true
+     #toc: true
 ---
 
-## arcenso
+# arcenso
 
 > Documentación en https://soyandrea.github.io/arcenso/
 
@@ -24,8 +20,7 @@ install.packages("remotes")
 remotes::install_github("SoyAndrea/arcenso")
 ```
 
-
-### Activación del paquete y otroa
+### Activación de arcenso y otros paquetes
 
 ```{r message=FALSE, warning=FALSE}
 library(arcenso)
@@ -34,23 +29,23 @@ library(plotly)
 library(gt)
 ```
 
+### Principales funciones
 
+-   `get_census()`: get a list with the tables currently available in the package
 
-## Main functions
+-   `check_repository()`: reports the tables currently available in the package
 
-- `get_census()`: get a list with the tables currently available in the package
+-   `arcenso()`: shinyapp to query the available tables in the package
 
-- `check_repository()`: reports the tables currently available in the package
-
-- `arcenso()`: shinyapp to query the available tables in the package
-
-
-## 
-
+### Chequeo info disponible 1970 
 
 ```{r}
 get_census(year = 1970, topic = "ESTRUCTURA DE POBLACION", geolvl = "Total del país")
 ```
+
+## Estructura de población por grupos quinquenales de edad según sexo
+
+### Descargo la tabla con la función `get_census()`
 
 ```{r}
 estructura_1970 <- get_census(year = 1970, topic = "ESTRUCTURA DE POBLACION", geolvl = "Total del país")
@@ -60,67 +55,45 @@ str(estructura_1970)
 estructura_1970 <- estructura_1970[[1]]
 ```
 
-
+### Calculamos el porcentaje de  población por grupos quinquenales de edad según sexo 
 
 ```{r}
 estructura_1970 <- estructura_1970[estructura_1970$sexo != "Total", ]
+
+estructura_1970$grupo_de_edad = ifelse(estructura_1970$grupo_de_edad %in% "0-4", "00-04", estructura_1970$grupo_de_edad)
+estructura_1970$grupo_de_edad = ifelse(estructura_1970$grupo_de_edad %in% "5-9", "05-09", estructura_1970$grupo_de_edad)
+
 
 estructura_1970$poblacion = as.numeric(estructura_1970$poblacion)
 
 estructura_1970$poblacion_rel = ifelse(estructura_1970$sexo == "Varones",  - estructura_1970$poblacion / sum(estructura_1970$poblacion[estructura_1970$sexo == "Varones"]), estructura_1970$poblacion / sum(estructura_1970$poblacion[estructura_1970$sexo == "Mujeres"]))
 ```
 
+### Grafico pirámide de población 1970
 
 ```{r}
 pi <-
   estructura_1970 %>%
-  #rename(porcentaje = value) %>%
   ggplot(aes(x = poblacion_rel, y = grupo_de_edad, fill = sexo,
-             #text = paste("porcentaje:", abs(poblacion_rel), "%")
+             text = paste("porcentaje:", abs(poblacion_rel), "%")
              )) +
   geom_col() +
-  scale_fill_manual(values = c("#9D719E","#E6B43D")) +
+  scale_fill_manual(values = c("#003049","#f77f00")) +
   scale_x_continuous(breaks = seq(-0.1, 0.1, by = 0.05),
                     labels = paste0(c(seq(-10, 0, by = 5)*-1, seq(5, 10, by = 5)), "%")) +
   labs(
+    title = "Estructura de población por sexo y grupo de edad. Total del país. Año 1970",
     x = "porcentaje",
-    y = "grupo de edad"
+    y = "grupo de edad",
+    caption = "Fuente: INDEC, Censo Nacional de Población, Familias y Viviendas 1970."
   ) +
-  theme_bw() #+ theme(legend.position="bottom", legend.title = element_blank())
+  theme_bw() 
 
 ggplotly(pi, tooltip = c("text", "sexo", "edad")) %>% layout(legend = list(orientation = 'h'))
 
 ```
 
-```{r}
-# Datos de ejemplo
-edad <- c("0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", "80+")
-varones <- c(5000, 5200, 4800, 4600, 5000, 5300, 4900, 4700, 4500, 4400, 4000, 3800, 3500, 3000, 2500, 2000, 1500)
-mujeres <- c(4800, 5000, 4600, 4400, 4900, 5200, 5000, 4800, 4600, 4500, 4200, 4000, 3700, 3200, 2700, 2200, 1800)
 
-# Crear data frame
-poblacion <- data.frame(
-  Edad = factor(edad, levels = rev(edad)), # Ordenar las edades de mayor a menor para la pirámide
-  Varones = -varones, # Invertir los valores de los varones
-  Mujeres = mujeres
-)
 
-# Convertir a formato largo para ggplot2
-poblacion_largo <- tidyr::pivot_longer(poblacion, cols = c(Varones, Mujeres), names_to = "Sexo", values_to = "Poblacion")
 
-# Crear la pirámide de población
-ggplot(poblacion_largo, aes(x = Edad, y = Poblacion, fill = Sexo)) +
-  geom_bar(stat = "identity", position = "identity") +
-  scale_y_continuous(labels = abs) + # Mostrar los valores absolutos en el eje Y
-  coord_flip() + # Girar el gráfico
-  labs(
-    title = "Pirámide de Población",
-    x = "Edad",
-    y = "Población",
-    fill = "Sexo"
-  ) +
-  scale_fill_manual(values = c("Varones" = "blue", "Mujeres" = "pink")) +
-  theme_minimal()
-
-```
 
